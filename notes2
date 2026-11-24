@@ -1,0 +1,478 @@
+Jeffin@LAPTOP-AUA160NP UCRT64 /c
+$ git clone https://github.com/jeffinnisheths/exp4.git
+Cloning into 'exp4'...
+warning: You appear to have cloned an empty repository.
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c
+$ cd exp4
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git remote -v
+origin  https://github.com/jeffinnisheths/exp4.git (fetch)
+origin  https://github.com/jeffinnisheths/exp4.git (push)
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ echo "this is the original file" > app.txt
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ cat app.txt
+this is the original file
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git add app.txt
+warning: in the working copy of 'app.txt', LF will be replaced by CRLF the next time Git touches it
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git commit -m"initial commit"
+[main (root-commit) 4330ea6] initial commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 app.txt
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git branch
+* main
+
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git branch -a
+* main
+
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git push origin main
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 235 bytes | 235.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/jeffinnisheths/exp4.git
+ * [new branch]      main -> main
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ ls -la
+total 13
+drwxr-xr-x 1 Jeffin 197121  0 Nov 24 18:34 ./
+drwxr-xr-x 1 Jeffin 197121  0 Nov 24 18:32 ../
+drwxr-xr-x 1 Jeffin 197121  0 Nov 24 18:35 .git/
+-rw-r--r-- 1 Jeffin 197121 26 Nov 24 18:34 app.txt
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git branch -r
+  origin/main
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git branch -a
+* main
+  remotes/origin/main
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ vi app.txt
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git add app.txt
+warning: in the working copy of 'app.txt', LF will be replaced by CRLF the next time Git touches it
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git commit -m"local developer update"
+[main 827c410] local developer update
+ 1 file changed, 1 insertion(+)
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git fetch origin
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 934 bytes | 40.00 KiB/s, done.
+From https://github.com/jeffinnisheths/exp4
+   4330ea6..7d2aca4  main       -> origin/main
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git branch -a
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git log --oneline --graph --all
+* 7d2aca4 (origin/main, origin/HEAD) Update app.txt
+| * 827c410 (HEAD -> main) local developer update
+|/
+* 4330ea6 initial commit
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git rebase origin/main
+Auto-merging app.txt
+CONFLICT (content): Merge conflict in app.txt
+error: could not apply 827c410... local developer update
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+hint: Disable this message with "git config set advice.mergeConflict false"
+Could not apply 827c410... # local developer update
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main|REBASE 1/1)
+$ git status
+interactive rebase in progress; onto 7d2aca4
+Last command done (1 command done):
+   pick 827c410 # local developer update
+No commands remaining.
+You are currently rebasing branch 'main' on '7d2aca4'.
+  (fix conflicts and then run "git rebase --continue")
+  (use "git rebase --skip" to skip this patch)
+  (use "git rebase --abort" to check out the original branch)
+
+Unmerged paths:
+  (use "git restore --staged <file>..." to unstage)
+  (use "git add <file>..." to mark resolution)
+        both modified:   app.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main|REBASE 1/1)
+$ vi app.txt
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main|REBASE 1/1)
+$ git add app.txt
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main|REBASE 1/1)
+$ cat app.txt
+this is the original file
+
+remote developer added this line
+
+local developer added this line
+
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main|REBASE 1/1)
+$ git rebase --continue
+[detached HEAD 25ec2b8] local developer update
+ 1 file changed, 4 insertions(+)
+Successfully rebased and updated refs/heads/main.
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git log --oneline --graph
+* 25ec2b8 (HEAD -> main) local developer update
+* 7d2aca4 (origin/main, origin/HEAD) Update app.txt
+* 4330ea6 initial commit
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$ git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 314 bytes | 157.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/jeffinnisheths/exp4.git
+   7d2aca4..25ec2b8  main -> main
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/exp4 (main)
+$
+
+
+
+
+
+
+
+
+
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c
+$ mkdir experiment5
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c
+$ cd experiment5
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5
+$ git init -b main
+Initialized empty Git repository in C:/experiment5/.git/
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ echo "this is github experiment5" > app.txt
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git add app.txt
+warning: in the working copy of 'app.txt', LF will be replaced by CRLF the next time Git touches it
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git log --oneline
+fatal: your current branch 'main' does not have any commits yet
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git config --global user.name"jeffin"
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git config --global user.email"jeffin@gmail.com"
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git add app.txt
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git commit app.txt
+warning: in the working copy of 'app.txt', LF will be replaced by CRLF the next time Git touches it
+Aborting commit due to empty commit message.
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git log --oneline
+fatal: your current branch 'main' does not have any commits yet
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git commit -m"initial commit"
+[main (root-commit) 4e3e50f] initial commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 app.txt
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git log --oneline
+4e3e50f (HEAD -> main) initial commit
+
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git remote add origin https://github.com/jeffinnisheths/experiment5.git
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git remote -v
+origin  https://github.com/jeffinnisheths/experiment5.git (fetch)
+origin  https://github.com/jeffinnisheths/experiment5.git (push)
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git push -u origin main
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 237 bytes | 237.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/jeffinnisheths/experiment5.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git switch -c feature-branch
+Switched to a new branch 'feature-branch'
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (feature-branch)
+$ git branch
+* feature-branch
+  main
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (feature-branch)
+$ echo "Feature in a seperate branch" >>app.txt
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (feature-branch)
+$ git add app.txt
+warning: in the working copy of 'app.txt', LF will be replaced by CRLF the next time Git touches it
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (feature-branch)
+$ git commit -m"add feature branch change"
+[feature-branch 06a6ebe] add feature branch change
+ 1 file changed, 1 insertion(+)
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (feature-branch)
+$ git add app.txt
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (feature-branch)
+$ git log --oneline
+06a6ebe (HEAD -> feature-branch) add feature branch change
+4e3e50f (origin/main, main) initial commit
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (feature-branch)
+$ git push -u origin feature-branch
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 303 bytes | 303.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote:
+remote: Create a pull request for 'feature-branch' on GitHub by visiting:
+remote:      https://github.com/jeffinnisheths/experiment5/pull/new/feature-branch
+remote:
+To https://github.com/jeffinnisheths/experiment5.git
+ * [new branch]      feature-branch -> feature-branch
+branch 'feature-branch' set up to track 'origin/feature-branch'.
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (feature-branch)
+$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ cat app.txt
+this is github experiment5
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git log --oneline
+4e3e50f (HEAD -> main, origin/main) initial commit
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (main)
+$ git checkout feature-branch
+Switched to branch 'feature-branch'
+Your branch is up to date with 'origin/feature-branch'.
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (feature-branch)
+$ git log --oneline
+06a6ebe (HEAD -> feature-branch, origin/feature-branch) add feature branch change
+4e3e50f (origin/main, main) initial commit
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/experiment5 (feature-branch)
+$
+
+
+
+
+
+
+
+
+
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c
+$ git clone https://github.com/jeffinnisheths/gexp6.git
+Cloning into 'gexp6'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (3/3), done.
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c
+$ cd gexp6
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ ls
+README.md
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ git remote -v
+origin  https://github.com/jeffinnisheths/gexp6.git (fetch)
+origin  https://github.com/jeffinnisheths/gexp6.git (push)
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ py --version
+Python 3.13.7
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ ls -la
+total 13
+drwxr-xr-x 1 Jeffin 197121 0 Nov 24 21:00 ./
+drwxr-xr-x 1 Jeffin 197121 0 Nov 24 21:00 ../
+drwxr-xr-x 1 Jeffin 197121 0 Nov 24 21:00 .git/
+-rw-r--r-- 1 Jeffin 197121 7 Nov 24 21:00 README.md
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ vi sample.py
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ ls -la
+total 18
+drwxr-xr-x 1 Jeffin 197121  0 Nov 24 21:03 ./
+drwxr-xr-x 1 Jeffin 197121  0 Nov 24 21:00 ../
+drwxr-xr-x 1 Jeffin 197121  0 Nov 24 21:00 .git/
+-rw-r--r-- 1 Jeffin 197121  7 Nov 24 21:00 README.md
+-rw-r--r-- 1 Jeffin 197121 77 Nov 24 21:03 sample.py
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ py sample.py
+welcome to git experiment 6
+working with cloned repository
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        sample.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ git add sample.py
+warning: in the working copy of 'sample.py', LF will be replaced by CRLF the next time Git touches it
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ git commit -m"added python source file"
+[main 1063700] added python source file
+ 1 file changed, 2 insertions(+)
+ create mode 100644 sample.py
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ cat README.md
+# gexp6
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ py sample.py
+welcome to git experiment 6
+working with cloned repository
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ git checkout -b feature
+Switched to a new branch 'feature'
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (feature)
+$ ls -la
+total 18
+drwxr-xr-x 1 Jeffin 197121  0 Nov 24 21:03 ./
+drwxr-xr-x 1 Jeffin 197121  0 Nov 24 21:00 ../
+drwxr-xr-x 1 Jeffin 197121  0 Nov 24 21:05 .git/
+-rw-r--r-- 1 Jeffin 197121  7 Nov 24 21:00 README.md
+-rw-r--r-- 1 Jeffin 197121 77 Nov 24 21:03 sample.py
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (feature)
+$ cat README.md
+# gexp6
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (feature)
+$ git checkout main
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ git pull origin main
+From https://github.com/jeffinnisheths/gexp6
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ git pull origin main
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 918 bytes | 15.00 KiB/s, done.
+From https://github.com/jeffinnisheths/gexp6
+ * branch            main       -> FETCH_HEAD
+   f15c2ab..77a3b57  main       -> origin/main
+Merge made by the 'ort' strategy.
+ README.md | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ cat README.md
+# gexp6
+latest change added to remote
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (main)
+$ git checkout feature
+Switched to branch 'feature'
+
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (feature)
+$ cat README.md
+# gexp6
+Jeffin@LAPTOP-AUA160NP UCRT64 /c/gexp6 (feature)
+$
